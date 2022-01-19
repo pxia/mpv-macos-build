@@ -2,7 +2,7 @@
 
 Init submodules before building:
 ```
-git submodule init
+git pull --recurse-submodules --jobs=10
 ```
 
 - `build.sh` generates an app bundle `mpv.app`.
