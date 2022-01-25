@@ -22,11 +22,12 @@ cd ..
 
 # mpv
 cd mpv
+ls waf > /dev/null || ./bootstrap.py
 export PKG_CONFIG_PATH="$BASE/homebrew/opt/libarchive/lib/pkgconfig:$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LV_ALL="C" 
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH ./waf configure \
 	--prefix=$BASE/homebrew/ \
-	--enable-{libmpv-static,lua,libarchive,uchardet,javascript} \
+	--enable-{libmpv-shared,lua,libarchive,uchardet,javascript} \
 	--lua=luajit
 ./waf
 TOOLS/osxbundle.py -s build/mpv
