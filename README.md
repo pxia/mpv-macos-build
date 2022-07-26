@@ -1,7 +1,5 @@
 # mpv-macos-build
 
-## mpv-macos-build
-
 This build is most suited for Apple Silicon Macs. 
 It enables the exact set of hardware decoder that apple silicon supports, including `h264`, `h265`, `VP9`, and `ProRes`.
 However, this script can be modified and used for Intel macs. 
