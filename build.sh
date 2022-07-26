@@ -4,11 +4,18 @@ set -e
 cd $(dirname $0)
 BASE=$(pwd)
 
+PATH=$BASE/homebrew/bin:$PATH
+
 # install dependencies other than ffmpeg by homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 BREW=$BASE/homebrew/bin/brew
 $BREW install jpeg libarchive libass little-cms2 luajit-openresty mujs \
-	uchardet vapoursynth yt-dlp gnutls
+	uchardet vapoursynth yt-dlp gnutls libvpx x264 x265
+
+export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$BASE/homebrew/opt/libarchive/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$BASE/homebrew/opt/gnutls/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # ffmpeg
 cd FFmpeg
@@ -23,10 +30,6 @@ cd ..
 # mpv
 cd mpv
 ls waf > /dev/null || ./bootstrap.py
-export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$BASE/homebrew/opt/libarchive/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="$BASE/homebrew/opt/gnutls/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LV_ALL="C" 
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH ./waf configure \
 	--prefix=$BASE/homebrew/ \
