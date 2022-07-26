@@ -21,6 +21,8 @@ git pull --recurse-submodules --jobs=3
 ## How it works
 
 It creates a self contained Homebrew directory for all the dependencies other then `ffmpeg`.
+It is as hermetic as possible. It tries to use the libraries and tools in our own Homebrew directory. 
+However, it does use `clang` and some basic tools like `sed` or `tr` from your system.
 
 Tested on MacOS 12.4 (Apple Silicon)
 
