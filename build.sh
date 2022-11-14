@@ -9,8 +9,9 @@ PATH=$BASE/homebrew/bin:$PATH
 # install dependencies other than ffmpeg by homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 BREW=$BASE/homebrew/bin/brew
+$BREW install ninja meson
 $BREW install jpeg libarchive libass little-cms2 luajit-openresty mujs \
-	uchardet vapoursynth yt-dlp gnutls libvpx x264 x265
+	uchardet vapoursynth yt-dlp gnutls libvpx x264 x265 dav1d
 
 export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -21,7 +22,8 @@ export PKG_CONFIG_PATH="$BASE/homebrew/opt/gnutls/lib/pkgconfig:$PKG_CONFIG_PATH
 cd FFmpeg
 ./configure \
 	--prefix=$BASE/homebrew/ \
-	--enable-{gpl,nonfree,libass,libvpx,libx264,libx265,libfreetype,gnutls} \
+	--enable-{gpl,nonfree,libass,libfreetype,gnutls} \
+	--enable-{libvpx,libx264,libx265,libdav1d} \
 	--enable-hwaccel={h263,h264,hevc,mpeg1,mpeg2,mpeg4,vp9,prores}_videotoolbox
 make -j 8
 make install
@@ -29,13 +31,13 @@ cd ..
 
 # mpv
 cd mpv
-ls waf > /dev/null || ./bootstrap.py
-export LV_ALL="C" 
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH ./waf configure \
-	--prefix=$BASE/homebrew/ \
-	--enable-{libmpv-shared,lua,libarchive,uchardet,javascript} \
-	--lua=luajit
-./waf
+meson setup --wipe --prefix=/Users/xia/work/mpv-macos-build/homebrew/ build
+meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=luajit -Dlibarchive=auto -Dmacos-10-14-features=enabled build
+meson compile -C build
 TOOLS/osxbundle.py -s build/mpv
+
 cd ..
-cp -Rf mpv/build/mpv.app ./
+cp -Rf mpv/build/mpv.app ./ 
+rm -rf mpv/build/mpv.app
+
+
