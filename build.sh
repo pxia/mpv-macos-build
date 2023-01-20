@@ -31,7 +31,7 @@ cd ..
 
 # mpv
 cd mpv
-meson setup --wipe --prefix=/Users/xia/work/mpv-macos-build/homebrew/ build
+meson setup --wipe --prefix=$BASE/homebrew/ build || meson setup --prefix=$BASE/homebrew/ build
 meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=luajit -Dlibarchive=auto -Dmacos-10-14-features=enabled build
 meson compile -C build
 TOOLS/osxbundle.py -s build/mpv
