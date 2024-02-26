@@ -9,9 +9,9 @@ PATH=$BASE/homebrew/bin:$PATH
 # install dependencies other than ffmpeg by homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 BREW=$BASE/homebrew/bin/brew
-$BREW install ninja meson
+$BREW install ninja
 $BREW install jpeg libarchive libass little-cms2 luajit-openresty mujs \
-	uchardet vapoursynth yt-dlp gnutls libvpx x264 x265 dav1d
+	uchardet vapoursynth yt-dlp gnutls libvpx x264 x265 dav1d libplacebo
 
 export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -32,7 +32,7 @@ cd ..
 # mpv
 cd mpv
 meson setup --wipe --prefix=$BASE/homebrew/ build || meson setup --prefix=$BASE/homebrew/ build
-meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=luajit -Dlibarchive=auto -Dmacos-10-14-features=enabled build
+meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=luajit -Dlibarchive=auto build
 meson compile -C build
 TOOLS/osxbundle.py -s build/mpv
 
