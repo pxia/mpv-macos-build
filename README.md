@@ -30,4 +30,4 @@ It creates a self contained Homebrew directory for all the dependencies other th
 It is as hermetic as possible. It tries to use the libraries and tools in our own Homebrew directory. 
 However, it does use `clang`, `meson`, `dylibbundler` and some basic tools like `sed` or `tr` from your system.
 
-Tested on MacOS 14.6
+Tested on MacOS 15.0
