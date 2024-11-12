@@ -9,9 +9,9 @@ PATH=$BASE/homebrew/bin:$PATH
 # install dependencies other than ffmpeg by homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 BREW=$BASE/homebrew/bin/brew
-$BREW install ninja
+# $BREW install ninja
 $BREW install jpeg libass little-cms2 luajit-openresty mujs \
-	uchardet vapoursynth gnutls libvpx x264 x265 dav1d libplacebo molten-vk
+	uchardet vapoursynth gnutls libvpx dav1d libplacebo molten-vk
 
 export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -22,8 +22,9 @@ export PKG_CONFIG_PATH="$BASE/homebrew/opt/gnutls/lib/pkgconfig:$PKG_CONFIG_PATH
 cd FFmpeg
 ./configure \
 	--prefix=$BASE/homebrew/ \
+	--disable-programs \
 	--enable-{gpl,nonfree,libass,libfreetype,gnutls} \
-	--enable-{libvpx,libx264,libx265,libdav1d} \
+	--enable-{libvpx,libdav1d} \
 	--enable-hwaccel={h263,h264,hevc,mpeg1,mpeg2,mpeg4,vp9,prores}_videotoolbox
 make -j 8
 make install
