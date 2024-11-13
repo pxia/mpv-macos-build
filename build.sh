@@ -37,13 +37,11 @@ meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=l
 meson compile -C build
 ./build/mpv --version
 
-
 TOOLS/osxbundle.py -s build/mpv
+
 
 dylibbundler --bundle-deps --dest-dir build/mpv.app/Contents/MacOS/lib/ --install-path @executable_path/lib/ --fix-file build/mpv.app/Contents/MacOS/mpv
 
 cd ..
 cp -Rf mpv/build/mpv.app ./ 
-rm -rf mpv/build/mpv.app
-
-
+rm -rf mpv/build/mpv.app mpv/TOOLS/__pycache__
