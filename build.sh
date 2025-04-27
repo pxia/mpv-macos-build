@@ -25,7 +25,7 @@ cd FFmpeg
 	--disable-programs \
 	--enable-{gpl,nonfree,libass,libfreetype,gnutls} \
 	--enable-{libvpx,libdav1d} \
-	--enable-hwaccel={h263,h264,hevc,mpeg1,mpeg2,mpeg4,vp9,prores}_videotoolbox
+	--enable-hwaccel={h263,h264,hevc,mpeg1,mpeg2,mpeg4,vp9,prores,av1}_videotoolbox
 make -j 8
 make install
 cd ..
