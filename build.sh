@@ -20,6 +20,8 @@ export PKG_CONFIG_PATH="$BASE/homebrew/opt/gnutls/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # ffmpeg
 cd FFmpeg
+# patching libavcodec/version.h will be rejected, which is fine
+curl -L https://github.com/FFmpeg/FFmpeg/commit/f9c5c5358cfef3847674c6f3b3ded9611ebc5647.patch | patch -p1 || true
 ./configure \
 	--prefix=$BASE/homebrew/ \
 	--disable-programs \
