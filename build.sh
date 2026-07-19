@@ -34,11 +34,7 @@ cd ..
 cd mpv
 meson setup --wipe --prefix=$BASE/homebrew/ build || meson setup --prefix=$BASE/homebrew/ build
 meson configure -Doptimization=2 -Djavascript=enabled -Duchardet=enabled -Dlua=luajit -Dlibarchive=auto build
-meson compile -C build
-./build/mpv --version
+meson compile -C build macos-bundle
+./build/mpv.app/Contents/MacOS/mpv --version
 
-TOOLS/osxbundle.py build/mpv
-
-cd ..
-cp -Rf mpv/build/mpv.app ./ 
-rm -rf mpv/build/mpv.app mpv/TOOLS/__pycache__
+echo "Built at" $(realpath ./build/mpv.app)
