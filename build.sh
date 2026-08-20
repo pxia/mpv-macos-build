@@ -4,6 +4,21 @@ set -e
 cd $(dirname $0)
 BASE=$(pwd)
 
+HOMEBREW_URL="https://github.com/Homebrew/brew"
+HOMEBREW_COMMIT=$(cat "$BASE/HOMEBREW_COMMIT")
+
+if [ -d "$BASE/homebrew" ]; then
+    if [ ! -d "$BASE/homebrew/.git" ]; then
+        echo "Error: homebrew/ exists but is not a git repository" >&2
+        exit 1
+    fi
+    git -C "$BASE/homebrew" fetch origin
+    git -C "$BASE/homebrew" checkout "$HOMEBREW_COMMIT"
+else
+    git clone "$HOMEBREW_URL" "$BASE/homebrew"
+    git -C "$BASE/homebrew" checkout "$HOMEBREW_COMMIT"
+fi
+
 PATH=$BASE/homebrew/bin:$PATH
 
 # install dependencies other than ffmpeg by homebrew

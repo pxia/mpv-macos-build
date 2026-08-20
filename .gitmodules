@@ -4,6 +4,3 @@
 [submodule "FFmpeg"]
 	path = FFmpeg
 	url = https://github.com/FFmpeg/FFmpeg.git
-[submodule "homebrew"]
-	path = homebrew
-	url = https://github.com/Homebrew/brew
