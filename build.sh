@@ -26,7 +26,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 BREW=$BASE/homebrew/bin/brew
 # $BREW install ninja
 $BREW install -y jpeg libass little-cms2 luajit-openresty mujs \
-	uchardet vapoursynth gnutls libvpx dav1d libplacebo molten-vk
+	uchardet gnutls libvpx dav1d libplacebo molten-vk
 
 export PKG_CONFIG_PATH="$BASE/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="$BASE/homebrew/opt/luajit-openresty/lib/pkgconfig:$PKG_CONFIG_PATH"
